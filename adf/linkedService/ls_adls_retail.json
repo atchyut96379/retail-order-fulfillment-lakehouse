@@ -1,0 +1,10 @@
+{
+	"name": "ls_adls_retail",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stretaildev2716.dfs.core.windows.net/"
+		}
+	}
+}
