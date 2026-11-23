@@ -1,0 +1,30 @@
+{
+	"name": "ds_retail_binary_file",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_retail",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"container_name": {
+				"type": "string"
+			},
+			"folder_path": {
+				"type": "string"
+			},
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "@dataset().file_name",
+				"folderPath": "@dataset().folder_path",
+				"fileSystem": "@dataset().container_name"
+			}
+		}
+	}
+}
