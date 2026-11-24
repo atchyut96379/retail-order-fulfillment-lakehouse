@@ -63,7 +63,16 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": [],
+							"userProperties": [
+								{
+									"name": "FeedName",
+									"value": "@item().feed_name"
+								},
+								{
+									"name": "BatchDate",
+									"value": "@pipeline().parameters.batch_date"
+								}
+							],
 							"typeProperties": {
 								"source": {
 									"type": "BinarySource",
