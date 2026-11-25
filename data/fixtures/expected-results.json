@@ -1,0 +1,41 @@
+{
+  "finance_by_posting_date": {
+    "2026-11-20": {
+      "gross_inr": "1500.00",
+      "refund_inr": "0.00",
+      "net_inr": "1500.00"
+    },
+    "2026-11-21": {
+      "gross_inr": "500.00",
+      "refund_inr": "250.00",
+      "net_inr": "250.00"
+    }
+  },
+  "totals": {
+    "orders": 2,
+    "order_items": 3,
+    "payments": 3,
+    "refunds": 1,
+    "gross_inr": "2000.00",
+    "refund_inr": "250.00",
+    "net_inr": "1750.00"
+  },
+  "shipment_status_after_day_two": {
+    "SH1": "DELIVERED",
+    "SH2": "DISPATCHED"
+  },
+  "shipment_events": {
+    "clean": {
+      "raw": 4,
+      "accepted_unique": 4,
+      "duplicates": 0,
+      "quarantined": 0
+    },
+    "defects": {
+      "raw": 6,
+      "accepted_unique": 4,
+      "duplicates": 1,
+      "quarantined": 1
+    }
+  }
+}
