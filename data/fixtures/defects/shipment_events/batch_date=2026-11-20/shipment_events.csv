@@ -1,0 +1,2 @@
+event_id,shipment_id,event_ts_utc,source_sequence,status
+EV1,SH1,2026-11-20T12:00:00Z,1,DISPATCHED

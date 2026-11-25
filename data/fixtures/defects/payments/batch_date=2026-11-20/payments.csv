@@ -1,0 +1,3 @@
+payment_id,order_id,posted_ts_utc,amount_inr,status
+PAY1,O100,2026-11-20T09:01:00Z,1000.00,CAPTURED
+PAY2,O100,2026-11-20T09:02:00Z,500.00,CAPTURED

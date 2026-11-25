@@ -1,0 +1,5 @@
+feed_name,source_container,source_folder,sink_container,sink_folder,file_name
+orders,retail-source,orders,retail-raw,orders,orders.csv
+payments,retail-source,payments,retail-raw,payments,payments.csv
+shipments,retail-source,shipments,retail-raw,shipments,shipments.csv
+shipment_events,retail-source,shipment_events,retail-raw,shipment_events,shipment_events.csv
