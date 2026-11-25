@@ -24,19 +24,6 @@ This project ingests synthetic retail batches with Azure Data Factory, transform
 - Archived ADF logs showed two successful pipeline runs and eight successful copy activities.
 - The file-based stream processed four unique fixture events across two input files. Its latest state matched both carrier records. A simulated stale carrier sequence flagged only SH1.
 
-## Power BI report
-
-### Executive Revenue
-
-![Executive Revenue report page](docs/screenshots/executive-revenue.png)
-
-### Fulfillment Operations
-
-![Fulfillment Operations report page](docs/screenshots/fulfillment-operations.png)
-
-### Data Reliability
-
-![Data Reliability report page](docs/screenshots/data-reliability.png)
 
 ## Release checklist
 
