@@ -1,0 +1,135 @@
+{
+	"name": "pl_retail_ingest_batch",
+	"properties": {
+		"activities": [
+			{
+				"name": "LookupFeeds",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_retail_feed_config",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEachFeed",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupFeeds",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupFeeds').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "CopyFeedToRaw",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [
+								{
+									"name": "FeedName",
+									"value": "@item().feed_name"
+								},
+								{
+									"name": "BatchDate",
+									"value": "@pipeline().parameters.batch_date"
+								}
+							],
+							"typeProperties": {
+								"source": {
+									"type": "BinarySource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true
+									},
+									"formatSettings": {
+										"type": "BinaryReadSettings"
+									}
+								},
+								"sink": {
+									"type": "BinarySink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_retail_binary_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"container_name": "@item().source_container",
+										"folder_path": {
+											"value": "@concat(item().source_folder, '/batch_date=', pipeline().parameters.batch_date)",
+											"type": "Expression"
+										},
+										"file_name": "@item().file_name"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_retail_binary_file",
+									"type": "DatasetReference",
+									"parameters": {
+										"container_name": "@item().sink_container",
+										"folder_path": {
+											"value": "@concat(item().sink_folder, '/batch_date=', pipeline().parameters.batch_date)",
+											"type": "Expression"
+										},
+										"file_name": "@item().file_name"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"batch_date": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
